@@ -1,4 +1,3 @@
-console.log("Welcome to AddressBook Console");
 const prompt = require('prompt-sync')();
 class Contact {
     constructor(firstName, lastName, address, city, state, zip, phoneNumber, email) {
@@ -77,4 +76,83 @@ class Contact {
     }
   }
   
-  addContact();
+  function findContactByName(firstName, lastName) {
+    for (let i = 0; i < addressBook.length; i++) {
+      const contact = addressBook[i];
+      if (contact.firstName === firstName && contact.lastName === lastName) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  function editContact() {
+    const firstName = prompt("Enter First Name of the contact to edit:");
+    const lastName = prompt("Enter Last Name of the contact to edit:");
+  
+    const contactIndex = findContactByName(firstName, lastName);
+    if (contactIndex !== -1) {
+      const contact = addressBook[contactIndex];
+      console.log("Existing Contact:");
+      console.log("First Name:", contact.firstName);
+      console.log("Last Name:", contact.lastName);
+      console.log("Address:", contact.address);
+      console.log("City:", contact.city);
+      console.log("State:", contact.state);
+      console.log("Zip:", contact.zip);
+      console.log("Phone Number:", contact.phoneNumber);
+      console.log("Email:", contact.email);
+  
+      const newAddress = prompt("Enter new Address:");
+      const newCity = prompt("Enter new City:");
+      const newState = prompt("Enter new State:");
+      const newZip = prompt("Enter new Zip:");
+      const newPhoneNumber = prompt("Enter new Phone Number:");
+      const newEmail = prompt("Enter new Email:");
+  
+      try {
+        contact.address = newAddress;
+        contact.city = newCity;
+        contact.state = newState;
+        contact.zip = newZip;
+        contact.phoneNumber = newPhoneNumber;
+        contact.email = newEmail;
+  
+        console.log("Contact updated successfully!");
+      } catch (error) {
+        console.error("Error updating contact:", error.message);
+      }
+    } else {
+      console.log("Contact not found.");
+    }
+  }
+
+  let choice;
+
+do {
+  console.log("Welcome to AddressBookManager Menu");
+  console.log("Press 1 to Add Contact");
+  console.log("Press 2 to Edit Contact");
+  console.log("Press 3 for FInd By Name");
+  console.log("Press 0 to Exit");
+
+  choice = Number(prompt("Enter your choice: "));
+
+  switch (choice) {
+    case 1:
+      addContact();
+      break;
+    case 2:
+      editContact();
+      break;
+    case 3:
+        findContactByName();
+        break;
+    case 0:
+      console.log("Exiting the program...");
+      break;
+    default:
+      console.log("Invalid Input!!");
+      break;
+  }
+} while (choice !== 0);
