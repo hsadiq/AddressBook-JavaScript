@@ -60,7 +60,12 @@ const addressBook = [];
 function addContact() {
     const firstName = prompt("Enter First Name:");
     const lastName = prompt("Enter Last Name:");
-
+    const address = prompt("Enter Address:");
+    const city = prompt("Enter City:");
+    const state = prompt("Enter State:");
+    const zip = prompt("Enter Zip:");
+    const phoneNumber = prompt("Enter Phone Number:");
+    const email = prompt("Enter Email:");
     const existingContactIndex = findContactIndexByName(firstName, lastName);
     if (existingContactIndex !== -1) {
         console.log("Contact already exists in the address book.");
@@ -77,13 +82,6 @@ function findContactByName(firstName, lastName) {
     }
     return -1;
 }
-
-const address = prompt("Enter Address:");
-const city = prompt("Enter City:");
-const state = prompt("Enter State:");
-const zip = prompt("Enter Zip:");
-const phoneNumber = prompt("Enter Phone Number:");
-const email = prompt("Enter Email:");
 
 try {
     const contact = new Contact(
@@ -187,132 +185,132 @@ function countContacts() {
 
 function searchByCityOrState() {
     const searchOption = prompt(
-      "Enter 1 to search by City, 2 to search by State: "
+        "Enter 1 to search by City, 2 to search by State: "
     );
-  
+
     let searchKey, searchValue;
     if (searchOption === "1") {
-      searchKey = "city";
-      searchValue = prompt("Enter the City name: ");
+        searchKey = "city";
+        searchValue = prompt("Enter the City name: ");
     } else if (searchOption === "2") {
-      searchKey = "state";
-      searchValue = prompt("Enter the State name: ");
+        searchKey = "state";
+        searchValue = prompt("Enter the State name: ");
     } else {
-      console.log("Invalid search option.");
-      return;
-    }
-  
-    const filteredContacts = addressBook.filter(
-      (contact) => contact[searchKey] === searchValue
-    );
-  
-    console.log("Search Results:");
-    if (filteredContacts.length === 0) {
-      console.log("No contacts found.");
-    } else {
-      filteredContacts.forEach((contact) => {
-        console.log(contact);
-      });
-    }
-  }
-
-  function countContactsByCity() {
-    const countByCity = addressBook.reduce((countMap, contact) => {
-      const { city } = contact;
-      if (countMap.hasOwnProperty(city)) {
-        countMap[city] += 1;
-      } else {
-        countMap[city] = 1;
-      }
-      return countMap;
-    }, {});
-  
-    console.log("Count by City:");
-    for (const city in countByCity) {
-      console.log(`${city}: ${countByCity[city]}`);
-    }
-  }
-  
-  function countContactsByState() {
-    const countByState = addressBook.reduce((countMap, contact) => {
-      const { state } = contact;
-      if (countMap.hasOwnProperty(state)) {
-        countMap[state] += 1;
-      } else {
-        countMap[state] = 1;
-      }
-      return countMap;
-    }, {});
-  
-    console.log("Count by State:");
-    for (const state in countByState) {
-      console.log(`${state}: ${countByState[state]}`);
-    }
-  }
-
-
-  function sortAddressBookBy(field) {
-    let sortedAddressBook = [];
-  
-    switch (field) {
-      case "name":
-        sortedAddressBook = addressBook.sort((a, b) => {
-          const nameA = `${a.firstName} ${a.lastName}`.toUpperCase();
-          const nameB = `${b.firstName} ${b.lastName}`.toUpperCase();
-          if (nameA < nameB) {
-            return -1;
-          }
-          if (nameA > nameB) {
-            return 1;
-          }
-          return 0;
-        });
-        break;
-  
-      case "city":
-        sortedAddressBook = addressBook.sort((a, b) => {
-          const cityA = a.city.toUpperCase();
-          const cityB = b.city.toUpperCase();
-          if (cityA < cityB) {
-            return -1;
-          }
-          if (cityA > cityB) {
-            return 1;
-          }
-          return 0;
-        });
-        break;
-  
-      case "state":
-        sortedAddressBook = addressBook.sort((a, b) => {
-          const stateA = a.state.toUpperCase();
-          const stateB = b.state.toUpperCase();
-          if (stateA < stateB) {
-            return -1;
-          }
-          if (stateA > stateB) {
-            return 1;
-          }
-          return 0;
-        });
-        break;
-  
-      case "zip":
-        sortedAddressBook = addressBook.sort((a, b) => a.zip - b.zip);
-        break;
-  
-      default:
-        console.log("Invalid field for sorting.");
+        console.log("Invalid search option.");
         return;
     }
-  
+
+    const filteredContacts = addressBook.filter(
+        (contact) => contact[searchKey] === searchValue
+    );
+
+    console.log("Search Results:");
+    if (filteredContacts.length === 0) {
+        console.log("No contacts found.");
+    } else {
+        filteredContacts.forEach((contact) => {
+            console.log(contact);
+        });
+    }
+}
+
+function countContactsByCity() {
+    const countByCity = addressBook.reduce((countMap, contact) => {
+        const { city } = contact;
+        if (countMap.hasOwnProperty(city)) {
+            countMap[city] += 1;
+        } else {
+            countMap[city] = 1;
+        }
+        return countMap;
+    }, {});
+
+    console.log("Count by City:");
+    for (const city in countByCity) {
+        console.log(`${city}: ${countByCity[city]}`);
+    }
+}
+
+function countContactsByState() {
+    const countByState = addressBook.reduce((countMap, contact) => {
+        const { state } = contact;
+        if (countMap.hasOwnProperty(state)) {
+            countMap[state] += 1;
+        } else {
+            countMap[state] = 1;
+        }
+        return countMap;
+    }, {});
+
+    console.log("Count by State:");
+    for (const state in countByState) {
+        console.log(`${state}: ${countByState[state]}`);
+    }
+}
+
+
+function sortAddressBookBy(field) {
+    let sortedAddressBook = [];
+
+    switch (field) {
+        case "name":
+            sortedAddressBook = addressBook.sort((a, b) => {
+                const nameA = `${a.firstName} ${a.lastName}`.toUpperCase();
+                const nameB = `${b.firstName} ${b.lastName}`.toUpperCase();
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
+                return 0;
+            });
+            break;
+
+        case "city":
+            sortedAddressBook = addressBook.sort((a, b) => {
+                const cityA = a.city.toUpperCase();
+                const cityB = b.city.toUpperCase();
+                if (cityA < cityB) {
+                    return -1;
+                }
+                if (cityA > cityB) {
+                    return 1;
+                }
+                return 0;
+            });
+            break;
+
+        case "state":
+            sortedAddressBook = addressBook.sort((a, b) => {
+                const stateA = a.state.toUpperCase();
+                const stateB = b.state.toUpperCase();
+                if (stateA < stateB) {
+                    return -1;
+                }
+                if (stateA > stateB) {
+                    return 1;
+                }
+                return 0;
+            });
+            break;
+
+        case "zip":
+            sortedAddressBook = addressBook.sort((a, b) => a.zip - b.zip);
+            break;
+
+        default:
+            console.log("Invalid field for sorting.");
+            return;
+    }
+
     console.log(`Address Book Sorted by ${field.charAt(0).toUpperCase() + field.slice(1)}:`);
     sortedAddressBook.forEach((contact) => {
-      console.log(
-        `${contact.firstName} ${contact.lastName}, ${contact.address}, ${contact.city}, ${contact.state}, ${contact.zip}, ${contact.phoneNumber}, ${contact.email}`
-      );
+        console.log(
+            `${contact.firstName} ${contact.lastName}, ${contact.address}, ${contact.city}, ${contact.state}, ${contact.zip}, ${contact.phoneNumber}, ${contact.email}`
+        );
     });
-  }
+}
 
 let choice;
 
@@ -361,6 +359,15 @@ do {
             break;
         case 9:
             sortAddressBookBy("name");
+            break;
+        case 10:
+            sortAddressBookBy("city");
+            break;
+        case 11:
+            sortAddressBookBy("state");
+            break;
+        case 12:
+            sortAddressBookBy("zip");
             break;
         case 0:
             console.log("Exiting the program...");
