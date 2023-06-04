@@ -185,6 +185,37 @@ function countContacts() {
     console.log("Total number of contacts:", totalCount);
 }
 
+function searchByCityOrState() {
+    const searchOption = prompt(
+      "Enter 1 to search by City, 2 to search by State: "
+    );
+  
+    let searchKey, searchValue;
+    if (searchOption === "1") {
+      searchKey = "city";
+      searchValue = prompt("Enter the City name: ");
+    } else if (searchOption === "2") {
+      searchKey = "state";
+      searchValue = prompt("Enter the State name: ");
+    } else {
+      console.log("Invalid search option.");
+      return;
+    }
+  
+    const filteredContacts = addressBook.filter(
+      (contact) => contact[searchKey] === searchValue
+    );
+  
+    console.log("Search Results:");
+    if (filteredContacts.length === 0) {
+      console.log("No contacts found.");
+    } else {
+      filteredContacts.forEach((contact) => {
+        console.log(contact);
+      });
+    }
+  }
+
 let choice;
 
 do {
@@ -194,6 +225,7 @@ do {
     console.log("Press 3 for FInd By Name");
     console.log("Press 4 to Delete COntact");
     console.log("Press 5 to Get Count Of Contact");
+    console.log("press 6 to Search Contact by City or State");
     console.log("Press 0 to Exit");
 
     choice = Number(prompt("Enter your choice: "));
@@ -213,6 +245,9 @@ do {
             break;
         case 5:
             countContacts();
+            break;
+        case 6:
+            searchByCityOrState();
             break;
         case 0:
             console.log("Exiting the program...");
