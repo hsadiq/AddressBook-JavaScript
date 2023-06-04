@@ -142,6 +142,11 @@ class Contact {
     }
   }
 
+  function countContacts() {
+    const totalCount = addressBook.reduce((count) => count + 1, 0);
+    console.log("Total number of contacts:", totalCount);
+  }
+
   let choice;
 
 do {
@@ -150,6 +155,7 @@ do {
   console.log("Press 2 to Edit Contact");
   console.log("Press 3 for FInd By Name");
   console.log("Press 4 to Delete COntact");
+  console.log("Press 5 to Get Count Of Contact");
   console.log("Press 0 to Exit");
 
   choice = Number(prompt("Enter your choice: "));
@@ -166,6 +172,9 @@ do {
         break;
     case 4:
         deleteContact();
+        break;
+    case 5:
+        countContacts();
         break;
     case 0:
       console.log("Exiting the program...");
