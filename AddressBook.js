@@ -250,6 +250,70 @@ function searchByCityOrState() {
     }
   }
 
+
+  function sortAddressBookBy(field) {
+    let sortedAddressBook = [];
+  
+    switch (field) {
+      case "name":
+        sortedAddressBook = addressBook.sort((a, b) => {
+          const nameA = `${a.firstName} ${a.lastName}`.toUpperCase();
+          const nameB = `${b.firstName} ${b.lastName}`.toUpperCase();
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+  
+      case "city":
+        sortedAddressBook = addressBook.sort((a, b) => {
+          const cityA = a.city.toUpperCase();
+          const cityB = b.city.toUpperCase();
+          if (cityA < cityB) {
+            return -1;
+          }
+          if (cityA > cityB) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+  
+      case "state":
+        sortedAddressBook = addressBook.sort((a, b) => {
+          const stateA = a.state.toUpperCase();
+          const stateB = b.state.toUpperCase();
+          if (stateA < stateB) {
+            return -1;
+          }
+          if (stateA > stateB) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+  
+      case "zip":
+        sortedAddressBook = addressBook.sort((a, b) => a.zip - b.zip);
+        break;
+  
+      default:
+        console.log("Invalid field for sorting.");
+        return;
+    }
+  
+    console.log(`Address Book Sorted by ${field.charAt(0).toUpperCase() + field.slice(1)}:`);
+    sortedAddressBook.forEach((contact) => {
+      console.log(
+        `${contact.firstName} ${contact.lastName}, ${contact.address}, ${contact.city}, ${contact.state}, ${contact.zip}, ${contact.phoneNumber}, ${contact.email}`
+      );
+    });
+  }
+
 let choice;
 
 do {
@@ -262,6 +326,10 @@ do {
     console.log("press 6 to Search Contact by City or State");
     console.log("press 7 to Get Count By City");
     console.log("press 8 to Get Count By State");
+    console.log("Press 9 to Sort Contact By Name");
+    console.log("Press 10 to Sort Contact by City");
+    console.log("press 11 to Sort Contact by State");
+    console.log("press 12 to Sort Contact by ZipCode");
     console.log("Press 0 to Exit");
 
     choice = Number(prompt("Enter your choice: "));
@@ -290,6 +358,9 @@ do {
             break;
         case 8:
             countContactsByState();
+            break;
+        case 9:
+            sortAddressBookBy("name");
             break;
         case 0:
             console.log("Exiting the program...");
