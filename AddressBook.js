@@ -1,4 +1,5 @@
 console.log("Welcome to AddressBook Console");
+const prompt = require('prompt-sync')();
 class Contact {
     constructor(firstName, lastName, address, city, state, zip, phoneNumber, email) {
       this.validateName(firstName);
@@ -54,27 +55,26 @@ class Contact {
       }
     }
   }
-
-  try {
-    const contact1 = new Contact(
-      "Sadiq",
-      "Hussain",
-      "pasiyana",
-      "Jabalpur",
-      "Madhya Perdesh",
-      "482004",
-      "+91 7828606108",
-      "ksadik.320@gmail.com"
-    );
   
-    console.log("First Name:", contact1.firstName);
-    console.log("Last Name:", contact1.lastName);
-    console.log("Address:", contact1.address);
-    console.log("City:", contact1.city);
-    console.log("State:", contact1.state);
-    console.log("Zip:", contact1.zip);
-    console.log("Phone Number:", contact1.phoneNumber);
-    console.log("Email:", contact1.email);
-  } catch (error) {
-    console.error("Error creating contact:", error.message);
+  const addressBook = [];
+  
+  function addContact() {
+    const firstName = prompt("Enter First Name:");
+    const lastName = prompt("Enter Last Name:");
+    const address = prompt("Enter Address:");
+    const city = prompt("Enter City:");
+    const state = prompt("Enter State:");
+    const zip = prompt("Enter Zip:");
+    const phoneNumber = prompt("Enter Phone Number:");
+    const email = prompt("Enter Email:");
+  
+    try {
+      const contact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
+      addressBook.push(contact);
+      console.log("Contact added successfully.");
+    } catch (error) {
+      console.error("Error creating contact:", error.message);
+    }
   }
+  
+  addContact();
