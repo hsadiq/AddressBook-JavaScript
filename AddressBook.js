@@ -1,4 +1,4 @@
-console.log("Welcome to AddressBook Manager");
+console.log("Welcome to"+"\t"+"AddressBook Manager");
 class Contact {
     constructor(firstName, lastName, address, city, state, zip, phoneNumber, email) {
       this.firstName = firstName;
@@ -13,14 +13,14 @@ class Contact {
   }
   
   const contact1 = new Contact(
-    "Ashish",
-    "Pal",
-    "123 Main St",
-    "Cityville",
-    "Stateville",
-    "123456",
-    "1234567890",
-    "ashish.abc@gmail.com"
+    "Sadiq",
+    "Hussain",
+    "Pasiyana",
+    "Jabalpur",
+    "MP",
+    "482004",
+    "7828606108",
+    "ksadik320@gmail.com"
   );
   
   console.log("First Name:", contact1.firstName);
