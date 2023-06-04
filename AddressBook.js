@@ -216,6 +216,40 @@ function searchByCityOrState() {
     }
   }
 
+  function countContactsByCity() {
+    const countByCity = addressBook.reduce((countMap, contact) => {
+      const { city } = contact;
+      if (countMap.hasOwnProperty(city)) {
+        countMap[city] += 1;
+      } else {
+        countMap[city] = 1;
+      }
+      return countMap;
+    }, {});
+  
+    console.log("Count by City:");
+    for (const city in countByCity) {
+      console.log(`${city}: ${countByCity[city]}`);
+    }
+  }
+  
+  function countContactsByState() {
+    const countByState = addressBook.reduce((countMap, contact) => {
+      const { state } = contact;
+      if (countMap.hasOwnProperty(state)) {
+        countMap[state] += 1;
+      } else {
+        countMap[state] = 1;
+      }
+      return countMap;
+    }, {});
+  
+    console.log("Count by State:");
+    for (const state in countByState) {
+      console.log(`${state}: ${countByState[state]}`);
+    }
+  }
+
 let choice;
 
 do {
@@ -226,6 +260,8 @@ do {
     console.log("Press 4 to Delete COntact");
     console.log("Press 5 to Get Count Of Contact");
     console.log("press 6 to Search Contact by City or State");
+    console.log("press 7 to Get Count By City");
+    console.log("press 8 to Get Count By State");
     console.log("Press 0 to Exit");
 
     choice = Number(prompt("Enter your choice: "));
@@ -248,6 +284,12 @@ do {
             break;
         case 6:
             searchByCityOrState();
+            break;
+        case 7:
+            countContactsByCity();
+            break;
+        case 8:
+            countContactsByState();
             break;
         case 0:
             console.log("Exiting the program...");
