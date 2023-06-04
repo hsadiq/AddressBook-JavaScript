@@ -127,6 +127,21 @@ class Contact {
     }
   }
 
+
+  function deleteContact() {
+    const firstName = prompt("Enter First Name of the contact to delete:");
+    const lastName = prompt("Enter Last Name of the contact to delete:");
+  
+    const contactIndex = findContactByName(firstName, lastName);
+    if (contactIndex !== -1) {
+      const deletedContact = addressBook.splice(contactIndex, 1);
+      console.log("Contact deleted successfully!");
+      console.log("Deleted Contact:", deletedContact[0]);
+    } else {
+      console.log("Contact not found.");
+    }
+  }
+
   let choice;
 
 do {
@@ -134,6 +149,7 @@ do {
   console.log("Press 1 to Add Contact");
   console.log("Press 2 to Edit Contact");
   console.log("Press 3 for FInd By Name");
+  console.log("Press 4 to Delete COntact");
   console.log("Press 0 to Exit");
 
   choice = Number(prompt("Enter your choice: "));
@@ -147,6 +163,9 @@ do {
       break;
     case 3:
         findContactByName();
+        break;
+    case 4:
+        deleteContact();
         break;
     case 0:
       console.log("Exiting the program...");
